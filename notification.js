@@ -1,10 +1,18 @@
+import { database, ref, set, get, child, onValue } from './firebase-config.js';
+
 document.addEventListener('DOMContentLoaded', function() {
     const nameList = document.getElementById('nameList');
-    const savedNames = JSON.parse(localStorage.getItem('nameList')) || [];
+    const dbRef = ref(database, 'names');
 
-    savedNames.forEach(name => {
-        const listItem = createListItem(name);
-        nameList.appendChild(listItem);
+    onValue(dbRef, (snapshot) => {
+        nameList.innerHTML = '';
+        const data = snapshot.val();
+        if (data) {
+            Object.values(data).forEach(name => {
+                const listItem = createListItem(name);
+                nameList.appendChild(listItem);
+            });
+        }
     });
 
     const deleteAllButton = document.createElement('button');
@@ -14,10 +22,7 @@ document.addEventListener('DOMContentLoaded', function() {
     deleteAllButton.addEventListener('click', function() {
         const password = prompt('Enter the password to delete all names:');
         if (password === '123123') {
-            localStorage.removeItem('nameList');
-            while (nameList.firstChild) {
-                nameList.removeChild(nameList.firstChild);
-            }
+            set(dbRef, null);
             alert('Todos os nomes foram deletados.');
         } else {
             alert('Senha Incorreta.');
@@ -31,20 +36,17 @@ document.getElementById('notificationForm').addEventListener('submit', function(
     const name = document.getElementById('name').value;
     const messageElement = document.getElementById('message');
     const nameList = document.getElementById('nameList');
+    const dbRef = ref(database, 'names');
 
-    const names = Array.from(nameList.children).map(item => item.firstChild.textContent);
-    if (names.includes(name)) {
-        messageElement.textContent = `Error: ${name} já está na lista.`;
-        return;
-    }
-
-    messageElement.textContent = `Notification: ${name} pressed the button.`;
-
-    const listItem = createListItem(name);
-    nameList.appendChild(listItem);
-
-    names.push(name);
-    localStorage.setItem('nameList', JSON.stringify(names));
+    get(child(dbRef, name)).then((snapshot) => {
+        if (snapshot.exists()) {
+            messageElement.textContent = `Error: ${name} já está na lista.`;
+        } else {
+            messageElement.textContent = `Notification: ${name} pressed the button.`;
+            set(child(dbRef, name), name);
+            showBalloons();
+        }
+    });
 });
 
 function createListItem(name) {
@@ -59,9 +61,8 @@ function createListItem(name) {
     deleteButton.addEventListener('click', function() {
         const password = prompt('Enter the password to delete this name:');
         if (password === '123123') {
+            set(child(ref(database, 'names'), name), null);
             listItem.remove();
-            const names = Array.from(document.getElementById('nameList').children).map(item => item.firstChild.textContent);
-            localStorage.setItem('nameList', JSON.stringify(names));
             alert('Nome deletado.');
         } else {
             alert('Senha Incorreta.');
@@ -70,4 +71,19 @@ function createListItem(name) {
     listItem.appendChild(deleteButton);
 
     return listItem;
+}
+
+function showBalloons() {
+    const colors = ['red', 'blue', 'green', 'yellow', 'purple'];
+    for (let i = 0; i < 5; i++) {
+        const balloon = document.createElement('div');
+        balloon.className = 'balloon';
+        balloon.style.backgroundColor = colors[i];
+        balloon.style.left = `${20 * i}%`;
+        document.body.appendChild(balloon);
+
+        setTimeout(() => {
+            balloon.remove();
+        }, 10000);
+    }
 }

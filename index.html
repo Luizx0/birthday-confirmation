@@ -5,17 +5,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Luizin Birthday</title>
     <link rel="stylesheet" href="styles.css">
+    <script type="module" src="firebase-config.js"></script>
+    <script type="module" src="notification.js"></script>
 </head>
 <body>
     <h1>Luizin Birthday</h1>
     <form id="notificationForm">
         <label for="name">Name:</label>
         <input type="text" id="name" name="name" required>
+        <img id="luizinImage" src="./img/luizin.jpg" alt="Luizin">
         <br>
         <button type="submit">Confirmar presença</button>
     </form>
     <p id="message"></p>
     <ul id="nameList"></ul>
-    <script src="notification.js"></script>
 </body>
 </html>
