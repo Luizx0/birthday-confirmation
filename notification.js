@@ -4,12 +4,19 @@ document.addEventListener('DOMContentLoaded', function() {
     const nameList = document.getElementById('nameList');
     const dbRef = ref(database, 'names');
 
+    // Verifique se o nó 'names' existe e inicialize se necessário
+    get(dbRef).then((snapshot) => {
+        if (!snapshot.exists()) {
+            set(dbRef, {});
+        }
+    });
+
     onValue(dbRef, (snapshot) => {
         nameList.innerHTML = '';
         const data = snapshot.val();
         if (data) {
-            Object.values(data).forEach(name => {
-                const listItem = createListItem(name);
+            Object.keys(data).forEach(key => {
+                const listItem = createListItem(data[key].name);
                 nameList.appendChild(listItem);
             });
         }
@@ -23,6 +30,7 @@ document.addEventListener('DOMContentLoaded', function() {
         const password = prompt('Enter the password to delete all names:');
         if (password === '123123') {
             set(dbRef, null);
+            nameList.innerHTML = '';
             alert('Todos os nomes foram deletados.');
         } else {
             alert('Senha Incorreta.');
@@ -35,7 +43,6 @@ document.getElementById('notificationForm').addEventListener('submit', function(
     event.preventDefault();
     const name = document.getElementById('name').value;
     const messageElement = document.getElementById('message');
-    const nameList = document.getElementById('nameList');
     const dbRef = ref(database, 'names');
 
     get(child(dbRef, name)).then((snapshot) => {
@@ -43,8 +50,7 @@ document.getElementById('notificationForm').addEventListener('submit', function(
             messageElement.textContent = `Error: ${name} já está na lista.`;
         } else {
             messageElement.textContent = `Notification: ${name} pressed the button.`;
-            set(child(dbRef, name), name);
-            showBalloons();
+            set(child(dbRef, name), { name });
         }
     });
 });
@@ -71,19 +77,4 @@ function createListItem(name) {
     listItem.appendChild(deleteButton);
 
     return listItem;
-}
-
-function showBalloons() {
-    const colors = ['red', 'blue', 'green', 'yellow', 'purple'];
-    for (let i = 0; i < 5; i++) {
-        const balloon = document.createElement('div');
-        balloon.className = 'balloon';
-        balloon.style.backgroundColor = colors[i];
-        balloon.style.left = `${20 * i}%`;
-        document.body.appendChild(balloon);
-
-        setTimeout(() => {
-            balloon.remove();
-        }, 10000);
-    }
 }
