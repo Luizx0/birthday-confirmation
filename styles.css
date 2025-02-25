@@ -1,0 +1,132 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+    margin: 0;
+    padding: 20px;
+    overflow: hidden;
+}
+
+h1 {
+    color: #333;
+}
+
+form {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    max-width: 400px;
+    margin: 0 auto;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+    color: #555;
+}
+
+input[type="text"], input[type="date"] {
+    width: calc(100% - 22px);
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+}
+
+button {
+    background-color: #007BFF;
+    color: #fff;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+p#message {
+    color: #007BFF;
+    font-weight: bold;
+    text-align: center;
+}
+
+ul#nameList {
+    list-style-type: none;
+    padding: 0;
+    max-width: 400px;
+    margin: 20px auto 0;
+}
+
+ul#nameList li {
+    background-color: #fff;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    margin-bottom: 5px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+ul#nameList li button {
+    background-color: transparent;
+    color: red;
+    border: none;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+ul#nameList li button:hover {
+    color: darkred;
+}
+
+/* Balloon styles */
+@keyframes float {
+    0% {
+        transform: translateY(100vh);
+        opacity: 0;
+    }
+    50% {
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(-10vh);
+        opacity: 0;
+    }
+}
+
+.balloon {
+    position: absolute;
+    bottom: -100px;
+    width: 50px;
+    height: 70px;
+    background-color: red;
+    border-radius: 50%;
+    animation: float 10s linear infinite;
+}
+
+.balloon:nth-child(2) {
+    left: 20%;
+    animation-duration: 12s;
+    background-color: blue;
+}
+
+.balloon:nth-child(3) {
+    left: 40%;
+    animation-duration: 14s;
+    background-color: green;
+}
+
+.balloon:nth-child(4) {
+    left: 60%;
+    animation-duration: 16s;
+    background-color: yellow;
+}
+
+.balloon:nth-child(5) {
+    left: 80%;
+    animation-duration: 18s;
+    background-color: purple;
+}
