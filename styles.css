@@ -1,20 +1,23 @@
 body {
-    font-family: Arial, sans-serif;
-    background-color: #ffffffbf;
+    font-family: 'Courier New', Courier, monospace;
+    background: url('./img/SPx.jpg') no-repeat center center fixed;
+    background-size: cover;
     margin: 0;
     padding: 20px;
     overflow: hidden;
+    color: #00FF00;
 }
 
 h1 {
-    color: #333;
+    color: #00FF00;
+    text-shadow: 0 0 10px #00FF00, 0 0 20px #00FF00, 0 0 30px #00FF00, 0 0 40px #00FF00;
 }
 
 form {
-    background-color: #fff;
+    background-color: rgba(0, 0, 0, 0.8);
     padding: 20px;
     border-radius: 5px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 0 10px #00FF00;
     max-width: 400px;
     margin: 0 auto;
     position: relative;
@@ -23,34 +26,38 @@ form {
 label {
     display: block;
     margin-bottom: 5px;
-    color: #555;
+    color: #00FF00;
 }
 
 input[type="text"], input[type="date"] {
     width: calc(100% - 22px);
     padding: 10px;
     margin-bottom: 10px;
-    border: 1px solid #ccc;
+    border: 1px solid #00FF00;
     border-radius: 3px;
+    background-color: rgba(0, 0, 0, 0.8);
+    color: #00FF00;
 }
 
 button {
-    background-color: #007BFF;
-    color: #fff;
+    background-color: #00FF00;
+    color: #000;
     padding: 10px 15px;
     border: none;
     border-radius: 3px;
     cursor: pointer;
+    box-shadow: 0 0 10px #00FF00;
 }
 
 button:hover {
-    background-color: #0056b3;
+    background-color: #00CC00;
 }
 
 p#message {
-    color: #007BFF;
+    color: #00FF00;
     font-weight: bold;
     text-align: center;
+    text-shadow: 0 0 10px #00FF00, 0 0 20px #00FF00, 0 0 30px #00FF00, 0 0 40px #00FF00;
 }
 
 ul#nameList {
@@ -61,26 +68,27 @@ ul#nameList {
 }
 
 ul#nameList li {
-    background-color: #fff;
+    background-color: rgba(0, 0, 0, 0.8);
     padding: 10px;
-    border: 1px solid #ccc;
+    border: 1px solid #00FF00;
     border-radius: 3px;
     margin-bottom: 5px;
     display: flex;
     justify-content: space-between;
     align-items: center;
+    color: #00FF00;
 }
 
 ul#nameList li button {
     background-color: transparent;
-    color: red;
+    color: #FF0000;
     border: none;
     font-size: 16px;
     cursor: pointer;
 }
 
 ul#nameList li button:hover {
-    color: darkred;
+    color: #CC0000;
 }
 
 #luizinImage {
