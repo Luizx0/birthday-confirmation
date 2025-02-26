@@ -60,7 +60,9 @@ function createListItem(name) {
     const nameSpan = document.createElement('span');
     nameSpan.textContent = name;
     listItem.appendChild(nameSpan);
-
+    
+//FUNCIONOU PORRAAAAA
+    
     const deleteButton = document.createElement('button');
     deleteButton.textContent = 'X';
     deleteButton.style.marginLeft = '10px';
