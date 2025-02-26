@@ -1,8 +1,8 @@
-// Import the functions you need from the SDKs you need
+// Funcoes do firebase
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js";
 import { getDatabase, ref, set, get, child, onValue } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-database.js";
 
-// Your web app's Firebase configuration
+// Meter a API
 const firebaseConfig = {
     apiKey: "AIzaSyC4AjavlEZA4mc3A8q1qlG3FwyXF6CqqOI",
     authDomain: "birthday-confirmation.firebaseapp.com",
@@ -14,7 +14,7 @@ const firebaseConfig = {
     measurementId: "G-1RBV35Z66Q"
 };
 
-// Initialize Firebase
+// Inicializar a firebase
 const app = initializeApp(firebaseConfig);
 const database = getDatabase(app);
 
